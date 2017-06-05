@@ -9,21 +9,35 @@
 
 		public function __construct()
 		{
-			$this->client_secret = self::clientSecret();
-			$this->client_id = $this->client_secret->installed->client_id;
-			$this->client_secret_str = $this->client_secret->installed->client_secret;
-			$this->redirect_uri = $this->client_secret->installed->redirect_uris[0];
-			$this->uri = self::uri();
-			$this->authorization_code = self::authorizationCode();
-			$this->access_token = self::accessTokenFromLocal();
+			try {
+				$this->client_secret = self::clientSecret();
+				$this->client_id = $this->client_secret->installed->client_id;
+				$this->client_secret_str = $this->client_secret->installed->client_secret;
+				$this->redirect_uri = $this->client_secret->installed->redirect_uris[0];
+				$this->uri = self::uri();
+				$this->authorization_code = self::authorizationCode();
+				$this->access_token = self::accessTokenFromLocal();
+			} catch (\Exception $e) {
+				echo $e->getMessage(), "\n";
+			}
 		}
 
 		public function clientSecret()
 		{
 			$client_secret_file = dirname(__FILE__) . '/constants/client_secret.json';
-			$client_secret_json = file_get_contents($client_secret_file);
-			$client_secret_obj = json_decode($client_secret_json);
-			return $client_secret_obj;
+
+			try {
+				if (file_exists($client_secret_file)) {
+					$client_secret_json = file_get_contents($client_secret_file);
+					$client_secret_obj = json_decode($client_secret_json);
+					return $client_secret_obj;
+				} else {
+					throw new \Exception('Error: constants/client_secret.json doesn\'t exist.');
+				}
+			} catch (\Exception $e) {
+				echo $e->getMessage(), "\n";
+				throw new \Exception;
+			}
 		}
 
 		public function authorizationCode()
@@ -81,17 +95,32 @@
 		public function accessTokenFromLocal()
 		{
 			$access_token_file = dirname(__FILE__) . '/constants/access_token.json';
-			$access_token_json = file_get_contents($access_token_file);
-			$access_token_obj = json_decode($access_token_json);
-			return $access_token_obj;
+
+			try {
+				if (file_exists($access_token_file)) {
+					$access_token_json = file_get_contents($access_token_file);
+					$access_token_obj = json_decode($access_token_json);
+					return $access_token_obj;
+				} else {
+					throw new \Exception('Error: constants/access_token.json doesn\'t exist.');
+				}
+			} catch (\Exception $e) {
+				echo $e->getMessage(), "\n";
+				throw new \Exception('Error in accessTokenFromLocal');
+			}
 		}
+
 
 		public function refresh()
 		{
-			$secret = $this->client_secret;
-			$access_token = self::accessTokenFromLocal();
-			$refresh_token = $access_token->refresh_token;
-
+			try {
+				$secret = $this->client_secret;
+				$access_token = self::accessTokenFromLocal();
+				$refresh_token = $access_token->refresh_token;
+			} catch (\Exception $e) {
+				echo $e->getMessage(), "\n";
+			}
+			
 			$client = new Client([
 				'base_uri' => 'https://www.googleapis.com/oauth2/v4/token',
 					'timeout'  => 2.0,
@@ -112,7 +141,11 @@
 
 		public function bearer()
 		{
-			$refreshed_token_obj = self::refresh();
+			try {
+				$refreshed_token_obj = self::refresh();
+			} catch (\Exception $e) {
+				echo $e->getMessage(), "\n";
+			}
 			$bearer = $refreshed_token_obj->access_token;
 			return $bearer;
 		}

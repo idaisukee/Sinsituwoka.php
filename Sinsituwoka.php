@@ -20,20 +20,22 @@
 
 		public function clientSecret()
 		{
-			$client_secret_json = file_get_contents('constants/client_secret.json');
+			$client_secret_file = dirname(__FILE__) . '/constants/client_secret.json';
+			$client_secret_json = file_get_contents($client_secret_file);
 			$client_secret_obj = json_decode($client_secret_json);
 			return $client_secret_obj;
 		}
 
 		public function authorizationCode()
 		{
-			$authorization_code = rtrim(file_get_contents('constants/authorization_code'));
+			$authorization_code_file = dirname(__FILE__) . '/constants/authorization_code';
+			$authorization_code = rtrim(file_get_contents($authorization_code_file));
 			return $authorization_code;
 		}
 
 		public function uri()
 		{
-			$scope_file = 'constants/scope';
+			$scope_file = dirname(__FILE__) . '/constants/scope';
 			try {
 				if (file_exists($scope_file)) {
 					$scope = rtrim(file_get_contents($scope_file));
@@ -78,7 +80,8 @@
 
 		public function accessTokenFromLocal()
 		{
-			$access_token_json = file_get_contents('constants/access_token.json');
+			$access_token_file = dirname(__FILE__) . '/constants/access_token.json';
+			$access_token_json = file_get_contents($access_token_file);
 			$access_token_obj = json_decode($access_token_json);
 			return $access_token_obj;
 		}

@@ -1,5 +1,5 @@
 <?php
-	require '../vendor/autoload.php';
+	require '../Sinsituwoka.php';
 
 	use Sinsituwoka\Sinsituwoka;
 

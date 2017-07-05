@@ -1,6 +1,6 @@
 <?php
 
-require '../vendor/autoload.php';
+	require '../Sinsituwoka.php';
 
 use GuzzleHttp\Client;
 use Sinsituwoka\Sinsituwoka;

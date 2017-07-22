@@ -9,7 +9,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Sinsituwoka\\": "",
+			"Sinsituwoka\\": "lib/",
 			"Constants\\": "constants/",
 			"Vendor\\Namespace\\": ""
 		}

@@ -1,8 +1,6 @@
 <?php
 	namespace Sinsituwoka;
 
-	require 'vendor/autoload.php';
-
 	use GuzzleHttp\Client;
 	class Sinsituwoka
 	{

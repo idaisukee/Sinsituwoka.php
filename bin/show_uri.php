@@ -1,8 +1,12 @@
 <?php
-require '../Sinsituwoka.php';
+	if (file_exists('../vendor/autoload.php')) {
+		require '../vendor/autoload.php';
+	} else {
+		require '../../../autoload.php';
+	}
 
-use Sinsituwoka\Sinsituwoka;
+	use Sinsituwoka\Sinsituwoka;
 
-$s = new Sinsituwoka();
+	$s = new Sinsituwoka();
 
-echo $s->uri;
+	echo $s->uri;

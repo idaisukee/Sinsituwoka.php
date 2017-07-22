@@ -3,7 +3,7 @@
 	if (file_exists('../vendor/autoload.php')) {
 		require '../vendor/autoload.php';
 	} else {
-		require '../../autoload.php';
+		require '../../../autoload.php';
 	}
 	use Sinsituwoka\Sinsituwoka;
 	//use GuzzleHttp\Client;

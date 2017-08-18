@@ -1,3 +1,7 @@
+# flavor text
+
+まるで新靜岡のやうにどこへでも行ける．
+
 # 手順
 
 http://qiita.com/shin1ogawa/items/49a076f62e5f17f18fe5 も参照．

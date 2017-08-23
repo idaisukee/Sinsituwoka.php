@@ -1,8 +1,8 @@
 <?php
-	if (file_exists('../vendor/autoload.php')) {
-		require '../vendor/autoload.php';
+	if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+		require __DIR__ . '/../vendor/autoload.php';
 	} else {
-		require '../../../autoload.php';
+		require __DIR__ . '/../../../autoload.php';
 	}
 
 	use Sinsituwoka\Sinsituwoka;
